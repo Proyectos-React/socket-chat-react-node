@@ -3,7 +3,7 @@ import { AuthContext } from '../auth/AuthContext'
 
 export const Searchbox = () => {
 
-    const { auth, logout } = useContext(AuthContext);
+    const { auth, logout } = useContext( AuthContext );
 
     return (
         <div className="headind_srch">
@@ -12,7 +12,10 @@ export const Searchbox = () => {
             </div>
             <div className="srch_bar">
                 <div className="stylish-input-group">
-                    <button onClick={ logout } className="btn text-danger">
+                    <button 
+                        className="btn text-danger"
+                        onClick={ logout }
+                    >
                         Salir
                     </button>
                 </div>

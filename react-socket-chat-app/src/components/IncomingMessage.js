@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const IncomingMessage = ({msg}) => {
+export const IncomingMessage = ({ msg }) => {
+
     return (
         <div className="incoming_msg">
             <div className="incoming_msg_img">
@@ -8,8 +9,8 @@ export const IncomingMessage = ({msg}) => {
             </div>
             <div className="received_msg">
                 <div className="received_withd_msg">
-                    <p>{msg.mensaje}</p>
-                    <span className="time_date"> {msg.fecha}</span>
+                    <p>{ msg.mensaje }</p>
+                    <span className="time_date"> { msg.fecha }</span>
                 </div>
             </div>
         </div>

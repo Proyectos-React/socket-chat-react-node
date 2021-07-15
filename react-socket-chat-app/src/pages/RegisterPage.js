@@ -1,19 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../auth/AuthContext';
 import Swal from 'sweetalert2';
 
-export const RegisterPage = () => {
-    const { register } = useContext(AuthContext);
+import { AuthContext } from '../auth/AuthContext';
 
-    const [form, setForm] = useState({
-        nombre: '',
+
+
+
+export const RegisterPage = () => {
+
+    const { register } = useContext( AuthContext );
+    
+    const [ form, setForm ] = useState({
         email: '',
         password: '',
+        name: ''
     });
 
-
-    const onChange = ({target}) => {
+    const onChange = ({ target }) => {
         const { name, value } = target;
         setForm({
             ...form,
@@ -21,36 +25,42 @@ export const RegisterPage = () => {
         });
     }
 
+    const onSubmit = async(ev) => {
+        ev.preventDefault();
+        
+        const { email, password, name } = form;
+        const msg = await register( name, email, password );
 
-    const onSubmit = async(e) => {
-        e.preventDefault();
-        const { nombre, email, password} = form;
-        const msg = await register(nombre, email, password );
-        if (msg !== true) {
-            Swal.fire('Error', msg, 'error')
+        if ( msg !== true ) {
+            Swal.fire('Error', msg, 'error');
         }
     }
 
-    const todoOK = () => {
-        return (form.nombre.length > 0 && form.email.length > 0 && form.password.length > 0 ) ? true: false;
+    const todoOk = () => {
+        return ( 
+            form.email.length > 0 && 
+            form.password.length > 0 &&
+            form.name.length > 0
+        ) ? true : false;
     }
 
+
     return (
-        <form
+        <form 
             className="login100-form validate-form flex-sb flex-w"
-            onSubmit = {onSubmit} 
+            onSubmit={ onSubmit }
         >
             <span className="login100-form-title mb-3">
                 Chat - Registro
             </span>
 
             <div className="wrap-input100 validate-input mb-3">
-                <input 
-                    className="input100" 
-                    type="text" 
-                    name="nombre" 
+                <input
+                    className="input100"
+                    type="text"
+                    name="name"
                     placeholder="Nombre" 
-                    value={form.nombre}
+                    value={ form.name }
                     onChange={ onChange }
                 />
                 <span className="focus-input100"></span>
@@ -58,12 +68,12 @@ export const RegisterPage = () => {
 
             
             <div className="wrap-input100 validate-input mb-3">
-                <input 
-                    className="input100" 
-                    type="email" 
-                    name="email" 
-                    placeholder="Email"
-                    value={form.email}
+                <input
+                    className="input100"
+                    type="email"
+                    name="email"
+                    placeholder="Email" 
+                    value={ form.email }
                     onChange={ onChange }
                 />
                 <span className="focus-input100"></span>
@@ -71,12 +81,12 @@ export const RegisterPage = () => {
             
             
             <div className="wrap-input100 validate-input mb-3">
-                <input 
-                    className="input100" 
-                    type="password" 
-                    name="password" 
+                <input
+                    className="input100"
+                    type="password"
+                    name="password"
                     placeholder="Password" 
-                    value={form.password}
+                    value={ form.password }
                     onChange={ onChange }
                 />
                 <span className="focus-input100"></span>
@@ -92,9 +102,9 @@ export const RegisterPage = () => {
 
             <div className="container-login100-form-btn m-t-17">
                 <button
-                    type="submit" 
+                    type="submit"
                     className="login100-form-btn"
-                    disabled={!todoOK()}
+                    disabled={ !todoOk() }
                 >
                     Crear cuenta
                 </button>

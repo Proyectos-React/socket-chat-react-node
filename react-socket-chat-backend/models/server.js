@@ -40,6 +40,10 @@ class Server {
         // API End Points
         this.app.use( '/api/login', require('../router/auth') );
         this.app.use( '/api/mensajes', require('../router/mensajes') );
+
+        this.app.use('*', (req, res) => {
+            res.sendFile(path.resolve( __dirname, '../public/index.html'))
+        })
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
